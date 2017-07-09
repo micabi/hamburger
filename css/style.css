@@ -1,9 +1,27 @@
+body{
+  position: relative;
+}
+
+#layer{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1; /* ヘッダー・ボディーより手前に */
+  display: none;
+}
+/* ========================== */
+/* ヘッダー              */
+/* ========================== */
 header{
   width: 100%;
   height: 80px;
   background-color: #FC3666;
   color: #fff;
-  position: relative;
+  position: fixed;
+  top: 0;
+  overflow-x: hidden; /* メニューが誤って表示されないように */
 }
 
 header h1, header p{
@@ -23,41 +41,58 @@ header #openMenu{
   right: 20px;
 }
 
-header nav{
-  position: absolute;
-  top: 80px;
-  left: 0;
-  width: 500px;
-  height: 100%;
+header nav#global-menu{
+  position: fixed;
+  top: 0;
+  right: -200px; /* 幅の分だけ隠す */
+  width: 200px;
+  height: 100%; /* 画面縦全部 */
   background-color: #fff;
-  /*display: none;*/
-  /*z-index: 1;*/
 }
 
-header nav ul{
+header nav#global-menu span#close-btn{
+  display: block;
+  width: 30px;
+  height: 20px;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #FC3666;
+  cursor: pointer;
+}
+
+header nav#global-menu ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-header nav ul li{
+header nav#global-menu ul li{
   padding: 10px;
-  border-top: 1px solid #c1c1c1;
+  border-bottom: 1px dotted #FC3666;
 }
 
-header nav ul li a{
+header nav#global-menu ul li a{
   display: block;
   width: 100%;
   height: 100%;
+  text-decoration: none;
 }
 
-header nav ul li:first-child{
-  border-top: 0;
+/* ========================== */
+/* コンテンツ              */
+/* ========================== */
+#content{
+  padding: 80px 10px 10px;
 }
 
-header nav ul li:last-child{
-  border-bottom: 1px solid #c1c1c1;
-}
+
+
+
+/* ========================== */
+/* フッター              */
+/* ========================== */
 
 footer{
   width: 100%;
