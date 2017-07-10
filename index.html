@@ -16,7 +16,15 @@
   <meta http-equiv="expires" content="0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/dracula.css">
+  <!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+-->
+<!--
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.css">
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-okaidia.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/line-numbers/prism-line-numbers.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/line-highlight/prism-line-highlight.css">
 </head>
 <body>
 <div id="layer"></div>
@@ -37,15 +45,15 @@
 </header>
 <div id="content">
 <h3>html</h3>
-<pre><code class="html">
+<pre class="line-numbers" data-line="7,9"><code class="language-markup" data-language="markup">
   &lt;body>
   &lt;div id="layer">&lt;/div>
   &lt;div id="wrap">
   &lt;header>
     &lt;h1 id="brand">Hamburger&lt;/h1>
-    &lt;p id="openMenu">&lt;a href="#">&lt;img src="images/hambtn.png" alt="ボタン" width="30" height="auto" />&lt;/a>&lt;/p>
+    &lt;p id="openMenu">&lt;a href="#">&lt;img src="images/hambtn.png" alt="ボタン" width="30" height="auto" />&lt;/a>&lt;/p> // ハンバーガーボタン
     &lt;nav id="global-menu">
-      &lt;span id="close-btn">X&lt;/span>
+      &lt;span id="close-btn">X&lt;/span> // クローズボタン
       &lt;ul>
         &lt;li>&lt;a href="#">Home&lt;/a>&lt;/li>
         &lt;li>&lt;a href="#">About&lt;/a>&lt;/li>
@@ -64,9 +72,9 @@
 </code></pre>
 
 <h3>css</h3>
-<pre><code class="css">
+<pre class="line-numbers" data-line="3,7-8,13,23,25,46-50,88"><code class="language-css" data-language="css">
   body{
-    position: relative;
+    position: relative; /* position: fixed;をつけた#layer・header・#global-menuのz-indexをコントロールするための起点 */
   }
 
   #layer{
@@ -97,23 +105,15 @@
   }
 
   header h1#brand{
-    float: left;
-    margin: 10px 0 0 20px;
-    /*
     position: absolute;
     top: 20px;
     left: 20px;
-    */
   }
 
   header #openMenu{
-    float: right;
-    margin: 20px 20px 0 0;
-    /*
     position: absolute;
     top: 20px;
     right: 20px;
-    */
   }
 
   header nav#global-menu{
@@ -164,13 +164,13 @@
 
 </code></pre>
 <h3>jQuery</h3>
-<pre><code>
+<pre class="line-numbers" data-line="7"><code class="language-javascript" data-language="javascript">
   $(document).ready(function(){
-    var toggleBtn = $('#openMenu'); // ボタン
-    var closeBtn = $('#close-btn');
+    var toggleBtn = $('#openMenu'); // ハンバーガーボタン
+    var closeBtn = $('#close-btn'); // クローズボタン
     var gMenu = $('#global-menu'); // グローバルメニュー
     var body = $(document.body); // ボディ
-    var menuWidth = gMenu.outerWidth(); // メニュー幅
+    var menuWidth = gMenu.outerWidth(); // メニュー幅(ボーダー・パディング込みの幅)
     var layer = $('#layer'); // メニューを出したときのバックグラウンドレイヤー
 
     toggleBtn.children('a').on('click', function(e){
@@ -178,24 +178,24 @@
       body.toggleClass('open');
 
       if (body.hasClass('open')) {
-        body.animate({'right': menuWidth}, 300);
-        gMenu.animate({'right': 0}, 300);
+        body.animate({'right': menuWidth}, 300); // メニューの幅の分だけ左のポジションへ
+        gMenu.animate({'right': 0}, 300); // right:0;のポジションへ
         layer.show();
       }else{
-        body.animate({'right': 0}, 300);
-        gMenu.animate({'right': -menuWidth}, 300);
+        body.animate({'right': 0}, 300); // right:0;のポジションへ
+        gMenu.animate({'right': -menuWidth}, 300); // メニューの幅の分だけ右のポジションへ
         layer.hide();
       }
     });
 
-    layer.on('click', function(){
+    layer.on('click', function(){ // レイヤーをクリックしたら
       body.animate({'right': 0}, 300);
       gMenu.animate({'right': -menuWidth}, 300);
       layer.hide();
       body.removeClass('open');
     });
 
-    closeBtn.on('click', function(){
+    closeBtn.on('click', function(){ // クローズボタンを押したら
       body.animate({'right': 0}, 300);
       gMenu.animate({'right': -menuWidth}, 300);
       layer.hide();
@@ -216,7 +216,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript" src="js/menu.js"></script>
-<script src="js/highlight.js"></script>
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/show-language/prism-show-language.js"></script>
 </body>
 </html>

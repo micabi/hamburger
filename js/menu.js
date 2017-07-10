@@ -13,10 +13,12 @@ $(document).ready(function(){
     if (body.hasClass('open')) {
       body.animate({'right': menuWidth}, 300);
       gMenu.animate({'right': 0}, 300);
+      toggleBtn.hide(); // ハンバーガーボタン非表示
       layer.show();
     }else{
       body.animate({'right': 0}, 300);
       gMenu.animate({'right': -menuWidth}, 300);
+      toggleBtn.show(); // ハンバーガーボタン表示
       layer.hide();
     }
   });
@@ -25,6 +27,7 @@ $(document).ready(function(){
     body.animate({'right': 0}, 300);
     gMenu.animate({'right': -menuWidth}, 300);
     layer.hide();
+    toggleBtn.show(); // ハンバーガーボタン表示
     body.removeClass('open');
   });
 
@@ -32,6 +35,7 @@ $(document).ready(function(){
     body.animate({'right': 0}, 300);
     gMenu.animate({'right': -menuWidth}, 300);
     layer.hide();
+    toggleBtn.show(); // ハンバーガーボタン表示
     body.removeClass('open');
   });
 });
