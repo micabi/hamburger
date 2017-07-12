@@ -15,6 +15,7 @@
   <meta http-equiv="cache-control" content="no-cache" />
   <meta http-equiv="expires" content="0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <!--
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
@@ -33,7 +34,7 @@
   <h1 id="brand">Hamburger</h1>
   <p id="openMenu"><a href="#"><img src="images/hambtn.png" alt="ボタン" width="30" height="auto" /></a></p>
   <nav id="global-menu">
-    <span id="close-btn">X</span>
+    <span id="close-btn"><i class="fa fa-window-close" aria-hidden="true"></i></span>
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">About</a></li>
@@ -75,6 +76,7 @@
 <pre class="line-numbers" data-line="3,7-8,13,23,25,46-50,88"><code class="language-css" data-language="css">
   body{
     position: relative; /* position: fixed;をつけた#layer・header・#global-menuのz-indexをコントロールするための起点 */
+    overflow-x: hidden; /* メニューが誤って表示されないように */
   }
 
   #layer{
@@ -96,7 +98,6 @@
     color: #fff;
     position: fixed;
     top: 0;
-    overflow-x: hidden; /* メニューが誤って表示されないように */
   }
 
   header h1, header p{
@@ -167,6 +168,7 @@
 <pre class="line-numbers" data-line="7"><code class="language-javascript" data-language="javascript">
   $(document).ready(function(){
     var toggleBtn = $('#openMenu'); // ハンバーガーボタン
+    var header = $('header');
     var closeBtn = $('#close-btn'); // クローズボタン
     var gMenu = $('#global-menu'); // グローバルメニュー
     var body = $(document.body); // ボディ
@@ -179,10 +181,12 @@
 
       if (body.hasClass('open')) {
         body.animate({'right': menuWidth}, 300); // メニューの幅の分だけ左のポジションへ
+        header.animate({'right': menuWidth}, 300); // ヘッダーもfixedしているのでbodyと同様に
         gMenu.animate({'right': 0}, 300); // right:0;のポジションへ
         layer.show();
       }else{
         body.animate({'right': 0}, 300); // right:0;のポジションへ
+        header.animate({'right': 0}, 300);
         gMenu.animate({'right': -menuWidth}, 300); // メニューの幅の分だけ右のポジションへ
         layer.hide();
       }
@@ -190,6 +194,7 @@
 
     layer.on('click', function(){ // レイヤーをクリックしたら
       body.animate({'right': 0}, 300);
+      header.animate({'right': 0}, 300);
       gMenu.animate({'right': -menuWidth}, 300);
       layer.hide();
       body.removeClass('open');
@@ -197,6 +202,7 @@
 
     closeBtn.on('click', function(){ // クローズボタンを押したら
       body.animate({'right': 0}, 300);
+      header.animate({'right': 0}, 300);
       gMenu.animate({'right': -menuWidth}, 300);
       layer.hide();
       body.removeClass('open');
