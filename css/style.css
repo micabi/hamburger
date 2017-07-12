@@ -1,5 +1,6 @@
 body{
   position: relative;
+  overflow-x: hidden; /* メニューが誤って表示されないように */
 }
 
 #layer{
@@ -21,7 +22,6 @@ header{
   color: #fff;
   position: fixed;
   top: 0;
-  overflow-x: hidden; /* メニューが誤って表示されないように */
   z-index: 2;
 }
 
